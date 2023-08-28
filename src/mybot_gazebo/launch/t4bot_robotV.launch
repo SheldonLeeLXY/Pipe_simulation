@@ -9,12 +9,12 @@
   <param name="robot_description" command="$(find xacro)/xacro.py '$(find mybot_description)/urdf/mybot.xacro'"/>
   <!-- <group ns="mybot"> -->
   <!-- Robot pose -->
-  <arg name="xbot" default="-0.78"/>
+  <arg name="xbot" default="0.6"/>
   <arg name="ybot" default="3"/>
   <arg name="zbot" default="0.03"/>
   <arg name="roll" default="0"/>
   <arg name="pitch" default="0"/>
-  <arg name="yaw" default="1.57"/>
+  <arg name="yaw" default="-1.29"/>
   <arg name="robot_name" default="mybot"/>
 
   <!-- here, load the controller configurations -->
