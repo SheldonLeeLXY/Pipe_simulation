@@ -1,0 +1,699 @@
+<?xml version='1.0'?>
+
+<robot name="mybot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="cameraSize" value="0.001"/>
+  <xacro:property name="cameraMass" value="0.001"/>
+
+  <xacro:property name="wheel_radius" value="0.014"/>   
+  <xacro:property name="wheel_width" value="0.002"/>
+  <xacro:property name="wheel_mass" value="0.008"/>
+
+  <xacro:include filename="$(find mybot_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find mybot_description)/urdf/properties.xacro" />
+  <xacro:include filename="$(find mybot_description)/urdf/macros.xacro" />
+
+  <xacro:include filename="$(find mybot_description)/urdf/wheels.xacro" />
+  <xacro:include filename="$(find mybot_description)/urdf/caster_wheels.xacro" />  
+  <xacro:include filename="$(find mybot_description)/urdf/mybot_body.xacro" />
+  <xacro:include filename="$(find mybot_description)/urdf/mybot.gazebo" />
+  <!-- <gazebo>
+    <self_collide>true</self_collide>
+  </gazebo> -->
+  
+  <!-- <link name="base_link"> 
+  </link> -->
+  <link name="chassis">
+    <!-- <pose>0 0 0 0 0 0</pose> -->
+    <inertial>
+      <!-- <mass value="${base_box_mass}"/>
+      <xacro:box_inertia m="${base_box_mass}" x="${base_box_x}" y="${base_box_y}" z="${base_box_z}"/> -->
+      <mass value="0.58"/>
+      <!-- <origin rpy="0 0 0" xyz="0 0 -0.015"/> -->
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+        <!-- <xacro:cylinder_x_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" /> -->
+      <!-- <xacro:box_inertia m="0.58" x="0.036" y="0.054" z="0.018"/> -->
+      <!-- <box_inertia m="0.58" x="0.036" y="0.054" z="0.018"/> -->
+      <inertia ixx="0.000241935" ixy="0" ixz="0" iyy="0.000241935" iyz="0" izz="0.000241935"/>
+      <!-- <inertia ixx="0.000241935" ixy="0" ixz="0" iyy="0.000141935" iyz="0" izz="0.000241935"/> -->
+    </inertial>
+    <collision>
+      <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/chassis_collision.STL"/>
+      </geometry>
+    </collision>
+    <visual>
+      <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/chassis.STL"/>
+      </geometry>
+    </visual>
+  </link>
+  <!-- <joint name="base_link_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="base_link" />
+    <child link="chassis" />
+  </joint> -->
+  <!-- <xacro:link_wheel name="frontleft_wheel" r="${wheel_radius}" l="${wheel_width}" incr="${wheel_increment}" origin_rpy="0 0 0"/>
+  <xacro:joint_wheel name="frontleft_joint" parent="${base_name}" child="frontleft_wheel" origin_xyz="${-base_box_x/2.0-0.003} 0.0164 -0.011"/> -->
+  <link name="frontleft_wheel">
+      <inertial>
+        <mass value="${wheel_mass}"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+          <!-- <xacro:cylinder_x_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" /> -->
+        <cylinder_x_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+      </inertial>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </collision>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </visual>
+  </link>
+  <!-- <xacro:link_wheel name="frontright_wheel" r="${wheel_radius}" l="${wheel_width}" incr="${wheel_increment}" origin_rpy="${PI} 0 0"/>
+  <xacro:joint_wheel name="frontright_joint" parent="${base_name}" child="frontright_wheel" origin_xyz="${base_box_x/2.0+0.003} 0.0164 -0.011"/> -->
+  <link name="frontright_wheel">
+      <inertial>
+        <mass value="${wheel_mass}"/>
+        <origin rpy="${PI} 0 0" xyz="0 0 0"/>
+        <cylinder_x_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+      </inertial>
+      <collision>
+        <origin rpy="${PI} 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </collision>
+      <visual>
+        <origin rpy="${PI} 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </visual>
+  </link>
+  <!-- <xacro:link_wheel name="centerleft_wheel" r="${wheel_radius}" l="${wheel_width}" incr="${wheel_increment}" origin_rpy="${PI} 0 0"/>
+  <xacro:joint_wheel name="centerleft_joint" parent="${base_name}" child="centerleft_wheel" origin_xyz="${-base_box_x/2.0-0.007} 0 -0.011"/> -->
+  <link name="centerleft_wheel">
+      <inertial>
+        <mass value="${wheel_mass}"/>
+        <origin rpy="${PI} 0 0" xyz="0 0 0"/>
+        <cylinder_x_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+      </inertial>
+      <collision>
+        <origin rpy="${PI} 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </collision>
+      <visual>
+        <origin rpy="${PI} 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </visual>
+  </link>
+  <!-- <xacro:link_wheel name="centerright_wheel" r="${wheel_radius}" l="${wheel_width}" incr="${wheel_increment}" origin_rpy="0 0 0"/>
+  <xacro:joint_wheel name="centerright_joint" parent="${base_name}" child="centerright_wheel" origin_xyz="${base_box_x/2.0+0.007} 0 -0.011"/> -->
+  <link name="centerright_wheel">
+      <inertial>
+        <mass value="${wheel_mass}"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <cylinder_x_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+      </inertial>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </collision>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </visual>
+  </link>
+  <!-- <xacro:link_wheel name="backleft_wheel" r="${wheel_radius}" l="${wheel_width}" incr="${wheel_increment}" origin_rpy="0 0 0"/>
+  <xacro:joint_wheel name="backleft_joint" parent="${base_name}" child="backleft_wheel" origin_xyz="${-base_box_x/2.0-0.003} -0.0164 -0.011"/> -->
+  <link name="backleft_wheel">
+      <inertial>
+        <mass value="${wheel_mass}"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <cylinder_x_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+      </inertial>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </collision>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </visual>
+  </link>
+  <!-- <xacro:link_wheel name="backright_wheel" r="${wheel_radius}" l="${wheel_width}" incr="${wheel_increment}" origin_rpy="${PI} 0 0"/>
+  <xacro:joint_wheel name="backright_joint" parent="${base_name}" child="backright_wheel" origin_xyz="${base_box_x/2.0+0.003} -0.0164 -0.011"/> -->
+  <link name="backright_wheel">
+      <inertial>
+        <mass value="${wheel_mass}"/>
+        <origin rpy="${PI} 0 0" xyz="0 0 0"/>
+        <cylinder_x_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+      </inertial>
+      <collision>
+        <origin rpy="${PI} 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </collision>
+      <visual>
+        <origin rpy="${PI} 0 0" xyz="0 0 0"/>
+        <geometry> <mesh filename="/home/sheldon/mybot_ws_camera/src/mybot_description/meshes/wheel.STL"/>
+        </geometry>
+      </visual>
+  </link>
+  <!-- ======================================================END OF LINKS====================================== -->
+ <!--END OF 4 bar linkage for right wheel constraints-->
+  <!-- ========================================================SENSORS================================================ -->
+  <link name="ir_left">  
+   <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry> <box size="0.002 0.002 0.002"/>
+      </geometry>
+   </visual>  
+  </link>
+  <gazebo reference="ir_left">
+      <material>Gazebo/Blue</material>
+  </gazebo>
+  <joint name="ir_left" type="fixed">
+    <axis xyz="0 0 0" />
+    <origin rpy="0 0 2.2689" xyz="-0.0085 0.0314 0.008" />
+    <parent link="chassis"/>
+    <child link="ir_left"/>
+  </joint>
+  <!-- =====================================right=================================== -->
+  <link name="ir_right"> 
+   <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry> <box size="0.001 0.002 0.002"/>
+      </geometry>
+   </visual>  
+  </link>
+  <gazebo reference="ir_right">
+      <material>Gazebo/Blue</material>
+  </gazebo>
+  <joint name="ir_right" type="fixed">
+    <axis xyz="0 0 0" />
+    <origin rpy="0 0 0.6981" xyz="0.0085 0.0314 0.008" />
+    <parent link="chassis"/>
+    <child link="ir_right"/>
+  </joint>
+  <!-- ==========================================front================================ -->
+  <link name="ir_front"> 
+   <visual>
+      <origin xyz="0 0 0" rpy="0 0 -1.5708"/>
+      <geometry> <box size="0.002 0.001 0.002"/>
+      </geometry>
+   </visual> 
+  </link>
+  <gazebo reference="ir_front">
+      <material>Gazebo/Blue</material>
+  </gazebo>
+  <joint name="ir_front" type="fixed">
+    <axis xyz="0 0 0" />
+    <origin rpy="0 0 1.5708" xyz="0 0.035 0.008" />
+    <parent link="chassis"/>
+    <child link="ir_front"/>
+  </joint>
+<!-- ==================================== IMU ================================= -->
+  <link name="imu_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry> <cylinder length="0.001" radius="0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry> <cylinder length="0.001" radius="0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="imu_link">
+      <material>Gazebo/Blue</material>
+  </gazebo>
+  <joint name="IMU" type="fixed">
+    <origin
+      xyz="0 0 0.018" rpy="0 0 0" />
+    <parent link="chassis" />
+    <child link="imu_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+<!-- ===================================== CAMERA ============================= -->
+  <link name="camera_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry> <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry> <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="camera_link">
+      <material>Gazebo/Blue</material>
+  </gazebo>
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 0.041 0.012" rpy="0 0 0"/>
+    <parent link="chassis"/>
+    <child link="camera_link"/>
+  </joint>
+  <!--===========================Force sensor to simulate touch sensor of the wheg robot=======================-->
+  <!-- <link name="touch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry> <box size="0.002 0.002 0.002"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry> <box size="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="touch_joint" type="revolute">
+    <origin rpy="0 0 1.5708" xyz="0 0.028 -0.001" />
+    <parent link="chassis" />
+    <child link="touch_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <dynamics damping="0.1" friction="0.1" />
+  </joint> -->
+  <!-- =============================================JOINTS============================================ -->
+  <joint name="frontleft_joint" type="revolute">
+      <origin rpy="0 0 0" xyz="${-base_box_x/2.0-0.003} 0.0164 -0.011"/>
+      <child link="frontleft_wheel"/>
+      <parent link="chassis"/>
+      <axis rpy="0 0 0" xyz="-1 0 0"/>
+      <limit lower="-10000" upper ="10000" effort="1.0" velocity="0.5"/>
+      <dynamics damping="0.4" friction="0.8"/>
+    </joint>
+  <joint name="frontright_joint" type="revolute">
+      <origin rpy="0 0 0" xyz="${base_box_x/2.0+0.003} 0.0164 -0.011"/>
+      <child link="frontright_wheel"/>
+      <parent link="chassis"/>
+      <axis rpy="0 0 0" xyz="-1 0 0"/>
+      <limit lower="-10000" upper ="10000" effort="1.0" velocity="0.5"/>
+      <dynamics damping="0.4" friction="0.8"/>
+    </joint>
+  <joint name="centerleft_joint" type="revolute">
+      <origin rpy="0 0 0" xyz="${-base_box_x/2.0-0.007} 0 -0.011"/>
+      <child link="centerleft_wheel"/>
+      <parent link="chassis"/>
+      <axis rpy="0 0 0" xyz="-1 0 0"/>
+      <limit lower="-10000" upper ="10000" effort="1.0" velocity="0.5"/>
+      <dynamics damping="0.4" friction="0.8"/>
+    </joint>
+  <joint name="centerright_joint" type="revolute">
+      <origin rpy="0 0 0" xyz="${base_box_x/2.0+0.007} 0 -0.011"/>
+      <child link="centerright_wheel"/>
+      <parent link="chassis"/>
+      <axis rpy="0 0 0" xyz="-1 0 0"/>
+      <limit lower="-10000" upper ="10000" effort="1.0" velocity="0.5"/>
+      <dynamics damping="0.4" friction="0.8"/>
+    </joint>
+  <joint name="backleft_joint" type="revolute">
+      <origin rpy="0 0 0" xyz="${-base_box_x/2.0-0.003} -0.0164 -0.011"/>
+      <child link="backleft_wheel"/>
+      <parent link="chassis"/>
+      <axis rpy="0 0 0" xyz="-1 0 0"/>
+      <limit lower="-10000" upper ="10000" effort="1.0" velocity="0.5"/>
+      <dynamics damping="0.4" friction="0.8"/>
+    </joint>
+  <joint name="backright_joint" type="revolute">
+      <origin rpy="0 0 0" xyz="${base_box_x/2.0+0.003} -0.0164 -0.011"/>
+      <child link="backright_wheel"/>
+      <parent link="chassis"/>
+      <axis rpy="0 0 0" xyz="-1 0 0"/>
+      <limit lower="-10000" upper ="10000" effort="1.0" velocity="0.5"/>
+      <dynamics damping="0.4" friction="0.8"/>
+    </joint>
+  <!-- =========================================== FOUR BAR LINKAGES ================================= -->
+  <!--4 bar linkage for right wheel constraints-->
+  <!-- <link name="link_BGr">
+    <inertial>
+      <origin xyz="0 -0.005 0" rpy="0 0 0" />
+      <mass value="0.001" />
+      <cylinder_y_inertia m="0.001" r="0.001" h="0.01"/>
+    </inertial>
+    <collision>
+      <origin xyz="0 -0.005 0" rpy="0 0 0" />
+      <geometry> <box size=".001 .012 .006"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 -0.005 0" rpy="0 0 0" />
+      <geometry> <box size=".001 .012 .006"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="joint_Br" type="revolute">
+    <origin rpy="0 0 0" xyz="0.0015 0 -0.008"/>
+    <parent link="frontright_wheel"/>
+    <child link="link_BGr"/>
+    <limit lower="-3.14" upper ="3.14" effort = "0.0" velocity = "0.0"/>
+    <axis xyz="-1 0 0"/>
+  </joint>
+
+  <link name="link_CHr">
+    <inertial>
+      <origin xyz="0 0.005 0" rpy="0 0 0" />
+      <mass value="0.001" />
+      <cylinder_y_inertia m="0.001" r="0.001" h="0.01"/>
+    </inertial>
+    <collision>
+      <origin xyz="0 0.005 0" rpy="0 0 0" />
+      <geometry> <box size=".001 .012 .006"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0.005 0" rpy="0 0 0" />
+      <geometry> <box size=".001 .012 .006"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="joint_Cr" type="revolute">
+    <origin rpy="0 0 0" xyz="0.0015 0 -0.008"/>
+    <parent link="backright_wheel"/>
+    <child link="link_CHr"/>
+    <limit lower="-3.14" upper ="3.14" effort = "0.0" velocity = "0.0"/>
+    <axis xyz="-1 0 0"/>
+  </joint>
+
+  <link name="link_GEHr">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <inertial>
+      <mass value="0.002" />
+      <cylinder_y_inertia m="0.002" r="0.001" h="0.02"/>
+    </inertial>
+    <collision>
+      <geometry> <box size=".001 .02 .006"/>
+      </geometry>
+    </collision>
+    <visual>
+      <geometry> <box size=".001 .02 .006"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="joint_Er" type="revolute">
+    <origin rpy="0 0 0" xyz="-0.0015 0 -0.008"/>
+    <parent link="centerright_wheel"/>
+    <child link="link_GEHr"/>
+    <limit lower="-3.14" upper ="3.14" effort = "0.0" velocity = "0.0"/>
+    <axis xyz="-1 0 0"/>
+  </joint>
+  <gazebo>
+    <joint name="joint_Gr" type="fixed">
+      <pose>0 -0.0082 0 0 0 0</pose>
+      <parent>link_GEHr</parent>
+      <child>link_BGr</child>
+      <limit lower="0.0" upper ="0.0" effort = "0.0" velocity = "0.0"/>
+      <axis xyz="-1 -1 -1"/>
+    </joint>
+  </gazebo>
+  <gazebo>
+    <joint name="joint_Hr" type="fixed">
+      <pose>0 0.0082 0 0 0 0</pose>
+      <parent>link_GEHr</parent>
+      <child>link_CHr</child>
+      <limit lower="0.0" upper ="0.0" effort = "0.0" velocity = "0.0"/>
+      <axis xyz="-1 -1 -1"/>
+    </joint>
+  </gazebo> -->
+  <!-- =================================== FOUR BAR LINKAGE LEFT SIDE ================================= -->
+  <!-- <link name="link_BGl">
+    <inertial>
+      <origin xyz="0 -0.005 0" rpy="0 0 0" />
+      <mass value="0.0001" />
+      <cylinder_y_inertia m="0.001" r="0.001" h="0.01"/>
+    </inertial>
+    <collision>
+      <origin xyz="0 -0.005 0" rpy="0 0 0" />
+      <geometry> <box size=".001 .012 .006"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 -0.005 0" rpy="0 0 0" />
+      <geometry> <box size=".001 .012 .006"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="joint_Bl" type="revolute">
+    <origin rpy="0 0 0" xyz="-0.002 0 0.008"/>
+    <parent link="frontleft_wheel"/>
+    <child link="link_BGl"/>
+    <limit lower="-3.14" upper ="3.14" effort = "0.0" velocity = "0.0"/>
+    <axis xyz="-1 0 0"/>
+  </joint>
+
+  <link name="link_CHl">
+    <inertial>
+      <origin xyz="0 0.005 0" rpy="0 0 0" />
+      <mass value="0.0001" />
+      <cylinder_y_inertia m="0.001" r="0.001" h="0.01"/>
+    </inertial>
+    
+    <collision>
+      <origin xyz="0 0.005 0" rpy="0 0 0" />
+      <geometry> <box size=".001 .012 .006"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0.005 0" rpy="0 0 0" />
+      <geometry> <box size=".001 .012 .006"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="joint_Cl" type="revolute">
+    <origin rpy="0 0 0" xyz="-0.002 0 0.008"/>
+    <parent link="backleft_wheel"/>
+    <child link="link_CHl"/>
+    <limit lower="-3.14" upper ="3.14" effort = "0.0" velocity = "0.0"/>
+    <axis xyz="-1 0 0"/>
+  </joint>
+
+  <link name="link_GEHl">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <inertial>
+      <mass value="0.0001" />
+      <cylinder_y_inertia m="0.002" r="0.001" h="0.02"/>
+    </inertial>
+    <collision>
+      <geometry> <box size=".001 .02 .006"/>
+      </geometry>
+    </collision>
+    <visual>
+      <geometry> <box size=".001 .02 .006"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="joint_El" type="revolute">
+    <origin rpy="0 0 0" xyz="0.002 0 0.008"/>
+    <parent link="centerleft_wheel"/>
+    <child link="link_GEHl"/>
+    <limit lower="-3.14" upper ="3.14" effort = "0.0" velocity = "0.0"/>
+    <axis xyz="-1 0 0"/>
+  </joint>
+  <gazebo>
+    <joint name="joint_Gl" type="fixed">
+      <pose>0 -0.0082 0 0 0 0</pose>
+      <parent>link_GEHl</parent>
+      <child>link_BGl</child>
+      <limit lower="0.0" upper ="0.0" effort = "0.0" velocity = "0.0"/>
+      <axis xyz="-1 -1 -1"/>
+    </joint>
+  </gazebo>
+  <gazebo>
+    <joint name="joint_Hl" type="fixed">
+      <pose>0 0.0082 0 0 0 0</pose>
+      <parent>link_GEHl</parent>
+      <child>link_CHl</child>
+      <limit lower="0.0" upper ="0.0" effort = "0.0" velocity = "0.0"/>
+      <axis xyz="-1 -1 -1"/>
+    </joint>
+  </gazebo> -->
+  <!-- =================================================TRANSMISSIONS================================== -->
+  <!--transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_left">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_right">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="extending">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor4">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission-->
+<!-- =========================================Velocity Controllers===================================== -->
+  <!-- <transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="frontleft_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="frontright_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="centerleft_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="centerright_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor4">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="backleft_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor5">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="backright_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor6">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission> -->
+
+  <!-- =================== Position Control for center joints ===================== -->
+  <transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="frontleft_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="frontright_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="centerleft_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="centerright_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor4">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="backleft_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor5">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="backright_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor6">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <!-- =================== End of Position Control for center joints ===================== -->
+
+</robot>
+
+

@@ -1,0 +1,2 @@
+active_vision:mybot_control:mybot_description:mybot_gazebo
+-DCATKIN_DEVEL_PREFIX=/home/sheldon/mybot_ws_camera/devel -DCMAKE_INSTALL_PREFIX=/home/sheldon/mybot_ws_camera/install -G Unix Makefiles

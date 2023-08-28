@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- <xacro:include filename="$(find mybot_description)/urdf/materials.xacro" /> -->
+  <xacro:include filename="$(find mybot_description)/urdf/properties.xacro" />
+  <xacro:include filename="$(find mybot_description)/urdf/macros.xacro" />
+    <!-- Wheels-->
+    <xacro:macro  name="link_wheel" params="name r l incr origin_rpy">
+      <link name="${name}">
+          <inertial>
+            <mass value="${wheel_mass}"/>
+            <origin rpy="${origin_rpy}" xyz="0 0 0"/>
+              <!-- <xacro:cylinder_inertia m="0.2" r="${r}" h="${l}" /> -->
+              <xacro:cylinder_x_inertia m="${wheel_mass}" r="${r}" h="${l}" />
+              <!-- <xacro:sphere_inertia m="0.2" r="${r}" /> -->
+          </inertial>
+          <collision name="link_right_wheel_collision">
+            <origin rpy="${origin_rpy}" xyz="0 0 0"/>
+            <geometry>
+              <!-- <cylinder length="${l}" radius="${r + incr}"/> -->
+              <mesh filename="$(find mybot_description)/meshes/wheel.STL" scale="1.0 1.0 1.0"/>
+            </geometry>
+          </collision>
+          <visual name="link_right_wheel_visual">
+            <origin rpy="${origin_rpy}" xyz="0 0 0"/>
+            <!-- <geometry>
+              <cylinder length="${l}" radius="${r + incr}"/>
+            </geometry> -->
+            <geometry>
+              <mesh filename="$(find mybot_description)/meshes/wheel.STL" scale="1.0 1.0 1.0"/>
+              <!-- <mesh filename="package://mybot_description/meshes/wheel.STL" /> -->
+            </geometry>
+            
+          </visual>
+          <material>Gazebo/Orange</material>
+      </link>
+  </xacro:macro >
+
+  <xacro:macro  name="joint_wheel" params="name parent child origin_xyz">
+    <joint name="${name}" type="continuous">
+      <origin rpy="0 0 0" xyz="${origin_xyz}"/>
+      <child link="${child}"/>
+      <parent link="${parent}"/>
+      <axis rpy="0 0 0" xyz="-1 0 0"/>
+      <limit effort="10000" velocity="1000"/>
+      <joint_properties damping="1.0" friction="1.0"/>
+    </joint>
+  </xacro:macro >
+
+
+  <!-- EXtra steering classes -->
+
+  <xacro:macro name="steering_joint" params="name1 name2 posxyz posrpy rot limlow limhigh limef limvel fr dm">
+    <joint name="${name1}__${name2}" type="revolute">
+      <parent link="${name1}"/>
+      <child link="${name2}"/>
+        <origin xyz="${posxyz}" rpy="${posrpy}"/>
+        <limit lower="${limlow}" upper="${limhigh}" effort="${limef}" velocity="${limvel}"/>
+        <axis xyz="${rot}"/>
+        <dynamics damping="${dm}" friction="${fr}"/>
+        <!-- TODO: When setting thes evalues, joint breaks -->
+        <!-- <dynamics friction="${fr}" damping="${dm}"/> -->
+    </joint>
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<!-- Constants -->
+	<xacro:property name="PI" value="3.1415926535897931"/>
+	
+	<!-- Base Box -->
+    <xacro:property name="base_name" value="chassis"/>
+    <xacro:property name="base_box_mass" value="0.58"/>
+	<xacro:property name="base_box_x" value="0.036"/>
+    <xacro:property name="base_box_y" value="0.054"/>
+    <xacro:property name="base_box_z" value="0.018"/>
+
+    <!-- Wheels -->
+    <xacro:property name="wheel_mass" value="0.02"/>
+	<xacro:property name="wheel_radius" value="0.014"/>
+    <xacro:property name="wheel_width" value="0.002"/>
+    <!-- <xacro:property name="wheel_increment" value="0.010"/> -->
+    <xacro:property name="wheel_increment" value="0.001"/>
+    <xacro:property name="mu1_wheel" value="0.8"/>
+    <xacro:property name="mu2_wheel" value="0.8"/>
+    <xacro:property name="kp_wheel" value="10000000.0"/>
+    <xacro:property name="kd_wheel" value="1.0"/>
+    <xacro:property name="maxVel_wheel" value="0.0"/>
+    <xacro:property name="minDepth_wheel" value="0.001"/>
+    <xacro:property name="color_wheel" value="Gazebo/Grey"/>
+    <!-- Four bar linkages -->
+    <xacro:property name="kp_bar" value="100000000.0"/>
+    <xacro:property name="kd_bar" value="1.0"/>
+    <xacro:property name="maxVel_bar" value="0.0"/>
+    <xacro:property name="minDepth_bar" value="0.01"/>
+    <!--Caster Wheels-->
+    <xacro:property name="dummy_length" value="0.001"/>
+
+    <!--Steering Joints Links-->
+    <xacro:property name="steering_joint_length" value="0.005"/>
+    <xacro:property name="steer_limlow" value="-0.6108"/>
+    <xacro:property name="steer_limhigh" value="0.6108"/>
+    <xacro:property name="steer_force" value="1000"/>
+    <xacro:property name="steer_vel" value="1.0"/>
+    <xacro:property name="steer_fric" value="2.0"/>
+    <xacro:property name="steer_amort" value="0.0"/>
+    
+    
+    
+
+</robot>

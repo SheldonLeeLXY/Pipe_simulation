@@ -1,0 +1,36 @@
+mybot:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Velocity Controllers ---------------------------------------
+  joint1_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: FL_axis
+    pid: {p: 10.0, i: 0.02, d: 1.0}
+  joint2_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: FR_axis
+    pid: {p: 10.0, i: 0.02, d: 1.0}
+  joint3_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: CL_axis
+    pid: {p: 10.0, i: 0.02, d: 1.0}
+  joint4_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: CR_axis
+    pid: {p: 10.0, i: 0.02, d: 1.0}
+  joint5_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: BL_axis
+    pid: {p: 10.0, i: 0.02, d: 1.0}
+  joint6_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: BR_axis
+    pid: {p: 10.0, i: 0.02, d: 1.0}
+  joint7_position_controller:
+    type: position_controllers/JointPositionController
+    joint: cam_joint
+    pid: {p: 5.0, i: 0.02, d: 0.75}
+

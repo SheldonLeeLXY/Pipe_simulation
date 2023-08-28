@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find mybot_control)/config/mybot_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner"
+    pkg="controller_manager"
+    type="spawner" respawn="false"
+    output="screen" ns="/mybot"
+    args="joint_state_controller
+          joint1_velocity_controller
+          joint2_velocity_controller
+	        joint3_velocity_controller
+          joint4_velocity_controller
+          joint5_velocity_controller
+          joint6_velocity_controller
+          joint3_position_controller
+          joint4_position_controller
+	        mobile_base_controller"
+  />
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" respawn="false" output="screen">
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find mybot_description)/urdf/mybot.xacro'"/>
+    <remap from="/joint_states" to="/mybot/joint_states" />
+  </node>
+
+  <!-- Create node to control joint positions using joint controller -->
+  <!--node name="joint_positions_node" pkg="mybot_control" type="position_controller.py" output="screen" respawn="true" /-->
+  <!--node name="mybot_wheg_control_node" pkg="mybot_control" type="mybot_wheg_controller.py" output="screen" respawn="true" /-->
+  <node name="mybot_joint_positions_node" pkg="mybot_control" type="mybot_position_controller.py" output="screen" respawn="true" />
+  <!--node name="mybot_joint_control_node" pkg="mybot_control" type="mybot_joint_controller.py" output="screen" respawn="true" /-->
+</launch>
+
+
+
+

@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+
+<robot name="pipenet" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find mybot_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find mybot_description)/urdf/properties.xacro" />
+  <xacro:include filename="$(find mybot_description)/urdf/macros.xacro" />
+  <xacro:include filename="$(find mybot_description)/urdf/mybot.gazebo" />
+  <link
+    name="pipenet">
+    <inertial>
+      <!-- <origin xyz="0 0.7 0.1" rpy="0 0 0"/> -->
+      <origin xyz="0 1.2 0.1" rpy="0 0 0"/>
+      <mass value="200.0"/>
+      <box_inertia m="200.0" x="4" y="4" z="0.2"/>
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <!-- <mesh filename="package://mybot_description/meshes/pipenet150.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipenet300.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipenetICAIR.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeicair.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeicairshort.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeobstacle.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeicairobstacle.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeicair_rightobstacle.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeicair_Ob_right.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipecomplex.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipecomplexcourse.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipecomplez.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipecomplex_loop.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeloop_hor.STL" /> -->
+        <mesh filename="package://mybot_description/meshes/pipenet_long.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <!-- <mesh filename="package://mybot_description/meshes/pipenet150.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipenet300.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipenetICAIR.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeicair.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeicairshort.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeobstacle.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeicairobstacle.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeicair_rightobstacle.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeicair_Ob_right.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipecomplex.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipecomplexcourse.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipecomplez.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipecomplex_loop.STL" /> -->
+        <!-- <mesh filename="package://mybot_description/meshes/pipeloop_hor.STL" /> -->
+        <mesh filename="package://mybot_description/meshes/pipenet_long.dae" />
+      </geometry>
+      <max_contacts>40</max_contacts>
+    </collision>
+  </link>
+</robot>
+
+

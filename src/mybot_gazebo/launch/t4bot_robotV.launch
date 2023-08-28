@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+    <!-- load the urdf robot file to param server -->
+  <!-- <arg name="urdf_robot_file" default="$(find mybot_description)/urdf/mybot.xacro"/>
+  <param name="robot_description" command="cat $(arg urdf_robot_file)"/> -->
+  <!-- <arg name="urdf_robot_file" default="$(find mybot_description)/urdf/mybot.xacro"/>
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(arg urdf_robot_file)'"/> -->
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find mybot_description)/urdf/mybot.xacro'"/>
+  <!-- <group ns="mybot"> -->
+  <!-- Robot pose -->
+  <arg name="xbot" default="-0.78"/>
+  <arg name="ybot" default="3"/>
+  <arg name="zbot" default="0.03"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="1.57"/>
+  <arg name="robot_name" default="mybot"/>
+
+  <!-- here, load the controller configurations -->
+  <rosparam file="$(find mybot_control)/config/t4bot_controlV.yaml" command="load"/>
+
+  <!-- spawn the robot -->
+  <!-- <param name="/mybot/robot_description" command="cat $(arg urdf_robot_file)"/> -->
+  <!-- <param name="/mybot/robot_description" command="$(find xacro)/xacro.py '$(find mybot_description)/urdf/mybot.xacro'"/> -->
+  <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+  args="-urdf -param robot_description -model mybot 
+        -x $(arg xbot) -y $(arg ybot) -z $(arg zbot)
+        -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)" />
+
+  <!-- here, load the controller -->
+  <node name="mybot_controller_spawner"
+  pkg="controller_manager"
+  type="spawner" respawn="false"
+  output="screen" ns="/mybot"
+  args="/mybot/joint_state_controller
+        /mybot/joint1_velocity_controller
+        /mybot/joint2_velocity_controller
+        /mybot/joint3_velocity_controller
+        /mybot/joint4_velocity_controller
+        /mybot/joint5_velocity_controller
+        /mybot/joint6_velocity_controller
+        /mybot/joint7_position_controller">
+  </node>
+  <!-- here add the robot state_publisher -->
+  <node name="t4robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+  <!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find mybot_description)/urdf/mybot.xacro'"/> -->
+    <param name="publish_frequency" type="double" value="10.0"/>
+    <!-- <remap from="/joint_states" to="/mybot/joint_states" /> -->
+  </node>
+  <!-- Create node to control joint positions using joint controller -->
+  <!--node name="joint_positions_node" pkg="mybot_control" type="position_controller.py" output="screen" respawn="true" /-->
+  <!--node name="mybot_wheg_control_node" pkg="mybot_control" type="mybot_wheg_controller.py" output="screen" respawn="true" /-->
+  <!-- <node name="mybot_joint_velocity_node" pkg="mybot_control" type="mybot_velocity_controller.py" output="screen" respawn="true" /> -->
+  <!--node name="mybot_joint_control_node" pkg="mybot_control" type="mybot_joint_controller.py" output="screen" respawn="true" /-->
+  <!-- ros_control rrbot launch file -->
+  <!-- <include file="$(find mybot_control)/launch/t4bot_control.launch" /> -->
+  <!-- </group> -->
+  
+</launch>

@@ -1,0 +1,8 @@
+<launch>
+
+<!-- <include file="$(find mybot_gazebo)/launch/t4_worldV.launch" /> -->
+
+<node pkg="active_vision" name="move_node" type="move_to_center.py" output="screen"></node>
+<node pkg="active_vision" name="record_code" type="record_images.py" output="screen"></node>
+
+</launch>

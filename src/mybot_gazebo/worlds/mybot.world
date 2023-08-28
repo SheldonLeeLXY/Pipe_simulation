@@ -1,0 +1,217 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <!-- We use a custom world for the rrbot so that the camera angle is launched correctly -->
+  <world name="default">
+    <!-- <physics type="ode"> -->
+      <!-- <max_step_size>0.002</max_step_size> -->
+      <!-- <real_time_factor>1</real_time_factor> -->
+      <!-- <real_time_update_rate>0</real_time_update_rate> -->
+      <!-- <ode>
+        <solver>
+          <type>world</type>
+        </solver> -->
+        <!-- <solver>
+          <type>quick</type>
+          <iters>50</iters>
+          <sor>1.4</sor>
+        </solver> -->
+      <!-- </ode>
+    </physics> -->
+    <!-- <gravity>0 0 -9.81</gravity> -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <!-- Global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <light name='user_point_light_0' type='point'>
+      <pose frame=''>0 0.7 0.15 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_point_light_1' type='point'>
+      <pose frame=''>0 2.0 0.15 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_point_light_2' type='point'>
+      <pose frame=''>0 3.3 0.15 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_point_light_3' type='point'>
+      <pose frame=''>0.5 1.5 0.15 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_point_light_4' type='point'>
+      <pose frame=''>-0.7 3.0 0.15 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_point_light_5' type='point'>
+      <pose frame=''>0.3 3.0 0.15 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_spot_light_0' type='spot'>
+      <pose frame=''>0 1.5 0.8 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>1.0</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_spot_light_1' type='spot'>
+      <pose frame=''>1.0 1.5 0.8 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>1.0</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_spot_light_2' type='spot'>
+      <pose frame=''>0 3.0 0.8 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>1.0</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_spot_light_3' type='spot'>
+      <pose frame=''>0.75 3.0 0.8 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>1.0</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_spot_light_4' type='spot'>
+      <pose frame=''>-1.2 3.0 0.8 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>1.0</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+      <direction>0 0 -1</direction>
+    </light>
+    <light name='user_spot_light_5' type='spot'>
+      <pose frame=''>0 4.0 0.8 0 0 0</pose>
+      <diffuse>126 126 126 255</diffuse>
+      <specular>24 24 24 255</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>1.0</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+      <direction>0 0 -1</direction>
+    </light>
+    <!-- Focus camera on tall pendulum -->
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>4.927360 -4.376610 3.740080 0.000000 0.275643 2.356190</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+
+  </world>
+</sdf>

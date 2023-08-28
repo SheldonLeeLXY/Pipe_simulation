@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+      <!-- load the urdf pipenet file to param server -->
+      <param name="pipenet_description" command="$(find xacro)/xacro.py '$(find mybot_description)/urdf/pipenet.xacro'"/>
+
+      <!-- spawn the pipenet -->
+      <node name="pipenet_spawn" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+      args="-urdf -param pipenet_description -model pipenet
+            -x 0.0 -y 0.0 -z 0.15 -Y 0" />
+            <!-- -x -0.6 -y 0.35 -z 0.15 -Y -1.57079632679" /> -->
+      <!-- add robot and contro to the world -->
+      <include file="$(find mybot_gazebo)/launch/t4bot_robotV.launch" />
+
+</launch>

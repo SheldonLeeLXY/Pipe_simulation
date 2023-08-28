@@ -1,0 +1,500 @@
+<?xml version="1.0"?>
+<robot>
+<!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/mybot</robotNamespace>
+      <robotParam>/robot_description</robotParam>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+  
+  <gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <legacyMode>false</legacyMode>
+      <alwaysOn>false</alwaysOn>
+      <updateRate>20</updateRate>
+      <leftJoint>CL_axis</leftJoint>
+      <rightJoint>CR_axis</rightJoint>
+      <wheelSeparation>0.042</wheelSeparation>
+      <wheelDiameter>0.056</wheelDiameter>
+      <torque>10</torque>
+      <commandTopic>robot/cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometrySource>1</odometrySource>
+      <robotBaseFrame>chassis</robotBaseFrame>
+    </plugin>
+  </gazebo>
+<!-- ==============================================robot main body properties ======================= -->
+  <gazebo reference="chassis">
+      <!-- <material>Gazebo/DarkOrangeTransparentOverlay</material> -->
+      <!-- <material>Gazebo/Indigo</material> -->
+      <material>Gazebo/Turquoise</material>
+      <!-- <material>Gazebo/Orange</material> -->
+      <kp>10000000.0</kp>
+      <kd>1.0</kd>
+      <mu1>0.4</mu1>
+      <mu2>0.4</mu2>
+      <maxVel>0.0</maxVel>
+      <minDepth>0.001</minDepth>
+  </gazebo>
+
+  <!-- <gazebo reference="pipenet">
+      <material>Gazebo/Aluminum</material>
+      <maxVel>0.0</maxVel>
+      <minDepth>0.001</minDepth>
+      <surface>
+        <friction>
+          <torsional>
+            <use_patch_radius>1</use_patch_radius>
+            <ode>
+              <slip>0</slip>
+            </ode>
+            <surface_radius>0</surface_radius>
+            <patch_radius>0</patch_radius>
+            <coefficient>1</coefficient>
+          </torsional>
+          <ode>
+            <fdir1>0 0 0</fdir1>
+            <mu>1</mu>
+            <slip2>0</slip2>
+            <mu2>1</mu2>
+            <slip1>0</slip1>
+          </ode>
+          <bullet>
+            <rolling_friction>1</rolling_friction>
+            <friction>1</friction>
+            <fdir1>0 0 0</fdir1>
+            <friction2>1</friction2>
+          </bullet>
+        </friction>
+      </surface>
+  </gazebo> -->
+
+  <!-- <material>Gazebo/Aluminum</material> -->
+  <gazebo reference="pipenet">
+      <material>Gazebo/Aluminum</material>
+      <!-- <material>Gazebo/Orange</material> -->
+      <!-- <material>Gazebo/WoodFloor</material> -->
+      <kp>10000000.0</kp>
+      <kd>1.0</kd>
+      <mu1>0.8</mu1>
+      <mu2>0.8</mu2>
+      <maxVel>0.0</maxVel>
+      <minDepth>0.0001</minDepth>
+  </gazebo>
+
+  <gazebo reference="frontleft_wheel">
+      <material>Gazebo/Grey</material>
+      <kp>10000000.0</kp>
+      <kd>1.0</kd>
+      <mu1>0.6</mu1>
+      <mu2>0.6</mu2>
+      <maxVel>0.0</maxVel>
+      <minDepth>0.001</minDepth>
+    </gazebo>
+
+  <gazebo reference="frontright_wheel">
+      <material>Gazebo/Grey</material>
+      <kp>10000000.0</kp>
+      <kd>1.0</kd>
+      <mu1>0.6</mu1>
+      <mu2>0.6</mu2>
+      <maxVel>0.0</maxVel>
+      <minDepth>0.001</minDepth>
+    </gazebo>
+
+  <gazebo reference="centerleft_wheel">
+      <material>Gazebo/Grey</material>
+      <kp>10000000.0</kp>
+      <kd>1.0</kd>
+      <mu1>0.6</mu1>
+      <mu2>0.6</mu2>
+      <maxVel>0.0</maxVel>
+      <minDepth>0.001</minDepth>  
+    </gazebo>
+
+  <gazebo reference="centerright_wheel">
+      <material>Gazebo/Grey</material>
+      <kp>10000000.0</kp>
+      <kd>1.0</kd>
+      <mu1>0.6</mu1>
+      <mu2>0.6</mu2>
+      <maxVel>0.0</maxVel>
+      <minDepth>0.001</minDepth>
+    </gazebo>
+
+  <gazebo reference="backleft_wheel">
+      <material>Gazebo/Grey</material>
+      <kp>10000000.0</kp>
+      <kd>1.0</kd>
+      <mu1>0.6</mu1>
+      <mu2>0.6</mu2>
+      <maxVel>0.0</maxVel>
+      <minDepth>0.001</minDepth>
+    </gazebo>
+
+  <gazebo reference="backright_wheel">
+      <material>Gazebo/Grey</material>
+      <kp>10000000.0</kp>
+      <kd>1.0</kd>
+      <mu1>0.6</mu1>
+      <mu2>0.6</mu2>
+      <maxVel>0.0</maxVel>
+      <minDepth>0.001</minDepth>
+    </gazebo>
+  <!-- ======================================end main body ============================= -->
+  
+      <!-- <kp>${kp_bar}</kp>
+      <kd>${kd_bar}</kd>
+      <selfCollide>true</selfCollide>
+      <maxVel>${maxVel_wheel}</maxVel>
+      <minDepth>${minDepth_bar}</minDepth> -->
+  <!-- <gazebo reference="link_BGr">
+      <kp>${kp_wheel}</kp>
+      <kd>${kd_wheel}</kd>
+      <mu1>${mu1_wheel}</mu1>
+      <mu2>${mu2_wheel}</mu2>
+      <maxVel>${maxVel_wheel}</maxVel>
+      <minDepth>${minDepth_wheel}</minDepth>
+      <material>${color_wheel}</material>  
+    </gazebo>
+  <gazebo reference="link_CHr">
+      <kp>${kp_wheel}</kp>
+      <kd>${kd_wheel}</kd>
+      <mu1>${mu1_wheel}</mu1>
+      <mu2>${mu2_wheel}</mu2>
+      <maxVel>${maxVel_wheel}</maxVel>
+      <minDepth>${minDepth_wheel}</minDepth>
+      <material>${color_wheel}</material>  
+    </gazebo>
+  <gazebo reference="link_GEHr">
+      <kp>${kp_wheel}</kp>
+      <kd>${kd_wheel}</kd>
+      <mu1>${mu1_wheel}</mu1>
+      <mu2>${mu2_wheel}</mu2>
+      <maxVel>${maxVel_wheel}</maxVel>
+      <minDepth>${minDepth_wheel}</minDepth>
+      <material>${color_wheel}</material>  
+    </gazebo>
+  <gazebo reference="link_BGl">
+      <kp>${kp_wheel}</kp>
+      <kd>${kd_wheel}</kd>
+      <mu1>${mu1_wheel}</mu1>
+      <mu2>${mu2_wheel}</mu2>
+      <maxVel>${maxVel_wheel}</maxVel>
+      <minDepth>${minDepth_wheel}</minDepth>
+      <material>${color_wheel}</material>  
+    </gazebo>
+  <gazebo reference="link_CHl">
+      <kp>${kp_wheel}</kp>
+      <kd>${kd_wheel}</kd>
+      <mu1>${mu1_wheel}</mu1>
+      <mu2>${mu2_wheel}</mu2>
+      <maxVel>${maxVel_wheel}</maxVel>
+      <minDepth>${minDepth_wheel}</minDepth>
+      <material>${color_wheel}</material>  
+    </gazebo>
+  <gazebo reference="link_GEHl">
+      <kp>${kp_wheel}</kp>
+      <kd>${kd_wheel}</kd>
+      <mu1>${mu1_wheel}</mu1>
+      <mu2>${mu2_wheel}</mu2>
+      <maxVel>${maxVel_wheel}</maxVel>
+      <minDepth>${minDepth_wheel}</minDepth>
+      <material>${color_wheel}</material>  
+    </gazebo> -->
+ 
+<!-- =======================================distance sensors============================ -->
+<gazebo reference="ir_left">        
+   <sensor type="ray" name="TeraRanger">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>20</update_rate>
+      <ray>
+         <scan>
+            <horizontal>
+               <samples>10</samples>
+               <resolution>1</resolution> 
+               <min_angle>-0.005</min_angle>
+               <max_angle>0.005</max_angle>
+            </horizontal>
+            <vertical>
+               <samples>10</samples>
+               <resolution>1</resolution> 
+               <min_angle>-0.005</min_angle>
+               <max_angle>0.005</max_angle> 
+            </vertical>
+         </scan>
+         <range>
+            <min>0.001</min>
+            <max>0.8</max>
+            <resolution>0.001</resolution>
+         </range>
+      </ray>
+      <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+         <gaussianNoise>0.001</gaussianNoise>
+         <alwaysOn>true</alwaysOn>
+         <updateRate>20</updateRate>
+         <topicName>sensor/ir_left</topicName>
+         <frameName>ir_left</frameName>
+         <radiation>INFRARED</radiation>
+         <fov>0.01</fov>
+      </plugin>
+   </sensor>  
+  </gazebo>
+<gazebo reference="ir_right">        
+   <sensor type="ray" name="TeraRanger">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>20</update_rate>
+      <ray>
+         <scan>
+            <horizontal>
+               <samples>10</samples>
+               <resolution>1</resolution> 
+               <min_angle>-0.005</min_angle>
+               <max_angle>0.005</max_angle>
+            </horizontal>
+            <vertical>
+               <samples>10</samples>
+               <resolution>1</resolution> 
+               <min_angle>-0.005</min_angle>
+               <max_angle>0.005</max_angle> 
+            </vertical>
+         </scan>
+         <range>
+            <min>0.001</min>
+            <max>0.8</max>
+            <resolution>0.001</resolution>
+         </range>
+      </ray>
+      <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+         <gaussianNoise>0.001</gaussianNoise>
+         <alwaysOn>true</alwaysOn>
+         <updateRate>20</updateRate>
+         <topicName>sensor/ir_right</topicName>
+         <frameName>ir_right</frameName>
+         <radiation>INFRARED</radiation>
+         <fov>0.01</fov>
+      </plugin>
+   </sensor>  
+  </gazebo>
+<gazebo reference="ir_front">        
+   <sensor type="ray" name="TeraRanger">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>20</update_rate>
+      <ray>
+         <scan>
+            <horizontal>
+               <samples>10</samples>
+               <resolution>1</resolution> 
+               <min_angle>-0.005</min_angle>
+               <max_angle>0.005</max_angle>
+            </horizontal>
+            <vertical>
+               <samples>10</samples>
+               <resolution>1</resolution> 
+               <min_angle>-0.005</min_angle>
+               <max_angle>0.005</max_angle> 
+            </vertical>
+         </scan>
+         <range>
+            <min>0.001</min>
+            <max>0.8</max>
+            <resolution>0.001</resolution>
+         </range>
+      </ray>
+      <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+         <gaussianNoise>0.001</gaussianNoise>
+         <alwaysOn>true</alwaysOn>
+         <updateRate>20</updateRate>
+         <topicName>sensor/ir_front</topicName>
+         <frameName>ir_front</frameName>
+         <radiation>INFRARED</radiation>
+         <fov>0.01</fov>
+      </plugin>
+   </sensor>  
+  </gazebo>
+
+ <!-- =======================================IMU===================================== -->
+<gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>20</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>20.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+  <!-- ============================================== CAMERA ============================================= -->
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="camera1">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <save enabled="false">
+          <path>/home/sheldon/camvideo/</path>
+        </save>
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30.0</updateRate>
+        <cameraName>camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+  <!-- ============================================== LIGHT ============================================= -->
+  <!-- <gazebo reference="chassis">
+    <light name='chassis/light_source1' type='spot'>
+    </light>
+    <plugin name='light_control' filename='libFlashLightPlugin.so'>
+        <enable>true</enable>
+        <light>
+          <id>chassis/light_source1</id>
+          <duration>0.5</duration>
+          <interval>0.4</interval>
+        </light>
+      </plugin>
+      <selfCollide>false</selfCollide>
+  </gazebo> -->
+
+
+
+  <!--Set the feedback to the joint to be true-->
+  <!-- <gazebo 
+      reference="touch_joint">
+     <provideFeedback>true</provideFeedback>
+  </gazebo> -->
+  <!-- Add ft_sensor plugin -->
+  <!-- <gazebo>
+    <plugin name="ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+      <updateRate>50.0</updateRate>
+      <topicName>touch_force</topicName>
+      <jointName>touch_joint</jointName>
+      <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.003</stddev> 
+        </noise>
+    </plugin>
+  </gazebo> -->
+
+</robot>
+  <!--gazebo>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <bodyName>imu_link</bodyName>
+      <topicName>imu1</topicName>
+      <serviceName>imu_service</serviceName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <updateRate>50.0</updateRate>
+    </plugin>
+  </gazebo-->
+
+<!--gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+
+      <rosDebugLevel>Debug</rosDebugLevel>
+      <publishWheelTF>false</publishWheelTF>
+      <robotNamespace>/</robotNamespace>
+      <publishTf>1</publishTf>
+      <publishWheelJointState>false</publishWheelJointState>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <leftJoint>wheel1_joint</leftJoint>
+      <rightJoint>wheel2_joint</rightJoint>
+      <wheelSeparation>0.2</wheelSeparation>
+      <wheelDiameter>0.1</wheelDiameter>
+      <broadcastTF>1</broadcastTF>
+      <wheelTorque>30</wheelTorque>
+      <wheelAcceleration>1.8</wheelAcceleration>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryFrame>odom</odometryFrame> 
+      <odometryTopic>odom</odometryTopic> 
+      <robotBaseFrame>base_link</robotBaseFrame>
+    </plugin>
+  </gazebo--> 
+
+  <!-- from box_bot -->
+  <!-- ros_control plugin -->
+  <!-- <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/myrobot</robotNamespace>
+      <robotParam>/robot_description</robotParam>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo> -->
+
+
+<!-- imu -->
+  <!-- <gazebo>
+    <plugin name="gazebo_ros_imu_controller" filename="libgazebo_ros_imu.so">
+      <robotNamespace>/myrobot/</robotNamespace>
+      <topicName>imu/data3</topicName>
+      <serviceName>imu/service</serviceName>
+      <bodyName>${base_name}</bodyName>
+      <gaussianNoise>0</gaussianNoise>
+      <rpyOffsets>0 0 0</rpyOffsets>
+      <updateRate>50.0</updateRate>
+      <alwaysOn>true</alwaysOn>
+      <gaussianNoise>0</gaussianNoise>
+    </plugin>
+  </gazebo> -->
+
+<!--Set the feedback to the joint to be true-->
+  <!-- <gazebo 
+      reference="touch_joint">
+     <provideFeedback>true</provideFeedback>
+    </gazebo>
+  <gazebo>
+    <plugin name="ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+      <updateRate>50.0</updateRate>
+      <topicName>touch_force</topicName>
+      <jointName>touch_joint</jointName>
+      <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.003</stddev>
+        </noise>
+    </plugin>
+  </gazebo> -->
